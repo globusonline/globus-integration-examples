@@ -1,9 +1,12 @@
 WordPress
 =========
 
+.. image:: wordpress-images/WPCoolScience.jpg
+   :width: 100%
+
 You can add Globus Auth to a WordPress site without writing any code. You’ll do most of 
-the work using a Web browser. After you have a WordPress site set up, you can add Globus
-Auth logins to it in about 15 minutes.
+the work using a Web browser. After you have a WordPress site set up, it will take about
+20 minutes to add Globus Auth logins to it.
 
 This method works because Globus Auth is a standard `OpenID Connect`_ (OIDC) service, and
 there's already good support in the WordPress community for OIDC.
@@ -19,8 +22,9 @@ What you'll need
 Your WordPress site must have SSL/TLS security enabled to use Globus Auth. In your Web
 browser, the address of your site should begin with ``https://``.  You'll have this 
 automatically if you're using a hosted WordPress site. If you're running 
-your own server, you'll need to obtain a secure server certificate. We recommend 
-`Let's Encrypt`_ as a source.
+your own server, you'll need to obtain and install a secure server certificate. We 
+recommend `Let's Encrypt`_ because it's free and because it's easy to use
+with most popular Web servers.
 
 .. _`Download WordPress`: https://wordpress.org/download
 .. _`Setup a WordPress host`: https://wordpress.com/pricing/
@@ -51,7 +55,7 @@ interface and some cool features, so we recommend that you get the newer version
 version hasn't been submitted to the WordPress library, so you'll need to obtain it from GitHub. The 
 GitHub repository is https://github.com/daggerhart/openid-connect-generic.git.
 
-If you have shell access on your WordPress server, the easiest way to obtain and install the plugin is to
+**If you have shell access** on your WordPress server, the easiest way to obtain and install the plugin is to
 login to your WordPress server, find the plugins directory in your WordPress installation, and use
 ``git clone`` to install it directly.
 
@@ -64,7 +68,7 @@ Assuming your wordpress server is named ``coolscience.wordpress.com`` and WordPr
    % cd /var/www/html/wordpress/wp-content/plugins
    % git clone https://github.com/daggerhart/openid-connect-generic.git
 
-If you don't have shell access on your WordPress server, you'll need to make a copy of the plugin
+**If you don't have shell access** on your WordPress server, you'll need to make a copy of the plugin
 on your local system, create a Zip file of the plugin, then upload it to your WordPress site.
 Open a terminal shell on your local system and enter the following commands.
 
@@ -140,7 +144,7 @@ Once you have a project, add a Web app, as shown in Figure 5.
 
    **Figure 5.** Add a new app registration to your project.
 
-The app registration form is shown in Figure 8, below. You’ll need to complete this form using 
+The app registration form is shown below in Figure 6. You’ll need to complete this form using 
 appropriate values for your WordPress site. 
 
 - The ``App name`` will be displayed on your app’s login page, so enter the name of your website. 
@@ -151,12 +155,12 @@ appropriate values for your WordPress site.
 - All of the remaining fields in the form can be left with default values. Click “Create App” at the 
   bottom of the form to register your app.
 
-.. figure:: wordpress-images/AppRegRegister.jpg
-   :width: 50%
-.. figure:: wordpress-images/AppRegRedirectURI.jpg
-   :width: 50%
++------------------------------------------------+---------------------------------------------------+
+|.. figure:: wordpress-images/AppRegRegister.jpg |.. figure:: wordpress-images/AppRegRedirectURI.jpg |
+|   :width: 100%                                 |   :width: 100%                                    |
++------------------------------------------------+---------------------------------------------------+
 
-   **Figure 6.** Register your WordPress Web application.
+**Figure 6.** Register your WordPress Web application.
 
 When you’ve registered your Web app with Globus, you’ll be able to view the registration, 
 as shown in Figure 7.
@@ -210,14 +214,11 @@ You should see the Globus “Logged out” page, shown in Figure 8.
 
    **Figure 8.** Your new logout page.
 
-For good measure, go ahead and click on the ``Log out`` link for Globus ID as well, 
-then return to your WordPress page again using the link below.
+For good measure, go ahead and click on the ``Log out`` link for Globus ID as well.
 
-  https://hostname.globushost.org/wordpress/
-
-When you log in again, you’ll see the OpenID Connect button above the login box, 
-shown in Figure 9. (You can change this to something better, like “Login with 
-Globus,” later.)
+Now, when you return to your WordPress site and click ``Log in``, you’ll see the OpenID 
+Connect button above the login box, shown in Figure 9. (You can change this to 
+something better, like “Login with Globus,” later.)
 
 .. figure:: wordpress-images/WPLoginWithOIDC.jpg
    :width: 75%
@@ -236,4 +237,9 @@ Notice that the login page in Figure 10 shows the application name that you ente
 when you registered the Web app with Globus Auth. (See Figure 6 for a reminder of 
 the registration page.) You can change this name at any time by returning to 
 developers.globus.org and clicking ``Edit`` when viewing the app registration.
+
+When you complete the Globus login, WordPress will create a user account for your 
+Globus identity and assign the basic subscriber role to the account. The same will
+happen for anyone else who logs in. When you login as an administrator, you can see 
+these accounts and assign different roles where appropriate.
 
