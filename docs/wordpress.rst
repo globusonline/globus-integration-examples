@@ -165,7 +165,7 @@ appropriate values for your WordPress site.
 When you’ve registered your Web app with Globus, you’ll be able to view the registration, 
 as shown in Figure 7.
 
-.. figure:: wordpress-images/AppRegview.jpg
+.. figure:: wordpress-images/AppRegView.jpg
    :width: 75%
 
    **Figure 7.** A newly registered app in Globus.
