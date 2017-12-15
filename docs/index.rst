@@ -6,8 +6,8 @@
 Globus Integration Examples
 ===========================
 
-This documentation provides examples demonstrating how to use the Globus `Auth API`_ with a variety of Web
-application frameworks. The Auth API is a REST API hosted by the `Globus`_ group at the University of Chicago.
+This documentation shows how to use the Globus `Auth API`_ with several popular Web application frameworks. 
+The Auth API is a REST API hosted by the `Globus`_ group at the University of Chicago.
 It is part of Globus's platform-as-a-service (PaaS) for research, and it is freely available for use by the 
 academic/research community. There are no licensing or per-use fees for the Auth API.
 
