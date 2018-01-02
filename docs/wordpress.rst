@@ -112,66 +112,22 @@ to register your Web application with Globus Auth.
 Register your application with Globus Auth
 ------------------------------------------
 
-Keep the WordPress window open and open another Web browser window. In this one, enter the address below.
+Keep the WordPress window open and open another Web browser window. In this one, follow the 
+`application registration instructions`_ in the Globus Auth Developer's Guide.
+As you follow these instructions, note that the Redirect address you'll need during 
+registration is provided by your WordPress OIDC plugin.  Go back to the WordPress 
+window and scroll to the very bottom of the OpenID Connect configuration page. 
+The Redirect URI is shown at the very bottom of the page, as shown in Figure 3. 
 
-  https://developers.globus.org/ 
+.. _`application registration instructions`: https://docs.globus.org/api/auth/developer-guide/#register-app
 
-The new window should look like Figure 3, below.
-
-.. figure:: wordpress-images/dev-globus-org.jpg
+.. figure:: wordpress-images/AppRegRedirectURI.jpg
    :width: 75%
 
-   **Figure 3.** Globus developers’ website.
+   **Figure 3.** Find the Redirect URI in your OpenID Connect plugin's configuration page.
 
-Click ``Register your app with Globus.`` You’ll need to login to Globus. If possible, choose 
-your home institution (college or university), or another organization where you have an 
-account (like XSEDE). Use Google if you don’t have an identity at a participating research 
-organization. Once you login, you should see the project screen shown in Figure 4.
-
-.. figure:: wordpress-images/AppRegProjectPage.jpg
-   :width: 75%
-
-   **Figure 4.** Create a project with Globus
-
-The project you create will be a place to keep track of all of the Web app registrations 
-you need for your application. (In this case, we’ll only need one, but some applications 
-may need more than one.) It’s only for your use, so you can call it anything you like.
-
-Once you have a project, add a Web app, as shown in Figure 5.
-
-.. figure:: wordpress-images/AppRegAdd.jpg
-   :width: 75%
-
-   **Figure 5.** Add a new app registration to your project.
-
-The app registration form is shown below in Figure 6. You’ll need to complete this form using 
-appropriate values for your WordPress site. 
-
-- The ``App name`` will be displayed on your app’s login page, so enter the name of your website. 
-- Leave ``Scopes`` empty. 
-- The ``Redirects`` field needs to be filled with the Redirect URI provided by your WordPress OIDC plugin. 
-  Go back to the WordPress window and scroll to the very bottom of the OpenID Connect configuration page. 
-  The Redirect URI is shown at the very bottom of the page, as shown in Figure 6. 
-- All of the remaining fields in the form can be left with default values. Click “Create App” at the 
-  bottom of the form to register your app.
-
-+------------------------------------------------+---------------------------------------------------+
-|.. figure:: wordpress-images/AppRegRegister.jpg |.. figure:: wordpress-images/AppRegRedirectURI.jpg |
-|   :width: 100%                                 |   :width: 100%                                    |
-+------------------------------------------------+---------------------------------------------------+
-
-**Figure 6.** Register your WordPress Web application.
-
-When you’ve registered your Web app with Globus, you’ll be able to view the registration, 
-as shown in Figure 7.
-
-.. figure:: wordpress-images/AppRegView.jpg
-   :width: 75%
-
-   **Figure 7.** A newly registered app in Globus.
-
-Take special note of the ``Client ID`` field. This is the first piece of information you’ll need 
-to complete your WordPress OIDC configuration below.  Select the value and copy it to your clipboard.
+When you've successfully registered your WordPress site with Globus, leave the registration
+data page open in your browser. You'll need it below.
 
 Finish configuring the plugin
 -----------------------------
@@ -207,36 +163,36 @@ Try it out
 Once you’ve configured your OpenID Connect plugin, your WordPress site is ready to 
 use with Globus Auth. Sign out of the site by hovering your pointer over your 
 userid in the upper-right corner of the WordPress window and select ``Log Out.`` 
-You should see the Globus “Logged out” page, shown in Figure 8.
+You should see the Globus “Logged out” page, shown in Figure 4.
 
 .. figure:: wordpress-images/WPLogout.jpg
    :width: 75%
 
-   **Figure 8.** Your new logout page.
+   **Figure 4.** Your new logout page.
 
 For good measure, go ahead and click on the ``Log out`` link for Globus ID as well.
 
 Now, when you return to your WordPress site and click ``Log in``, you’ll see the OpenID 
-Connect button above the login box, shown in Figure 9. (You can change this to 
+Connect button above the login box, shown in Figure 5. (You can change this to 
 something better, like “Login with Globus,” later.)
 
 .. figure:: wordpress-images/WPLoginWithOIDC.jpg
    :width: 75%
 
-   **Figure 9.** Your login page with OpenID Connect button.
+   **Figure 5.** Your login page with OpenID Connect button.
 
 Click ``Login with OpenID Connect,`` and you’ll see the Globus login page, shown in 
-Figure 10.
+Figure 6.
 
 .. figure:: wordpress-images/WPLoginWithGlobus.jpg
    :width: 75%
 
-   **Figure 10.** Your new login page.
+   **Figure 6.** Your new login page.
 
-Notice that the login page in Figure 10 shows the application name that you entered 
-when you registered the Web app with Globus Auth. (See Figure 6 for a reminder of 
-the registration page.) You can change this name at any time by returning to 
-developers.globus.org and clicking ``Edit`` when viewing the app registration.
+Notice that the login page in Figure 6 shows the application name that you entered 
+when you registered the Web app with Globus Auth.  You can change this name at any 
+time by returning to developers.globus.org and clicking ``Edit`` when viewing the 
+app registration.
 
 When you complete the Globus login, WordPress will create a user account for your 
 Globus identity and assign the basic subscriber role to the account. The same will
