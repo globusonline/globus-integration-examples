@@ -28,7 +28,7 @@ with most popular Web servers.
 
 .. _`Download WordPress`: https://wordpress.org/download
 .. _`Setup a WordPress host`: https://wordpress.com/pricing/
-.. _`OIDC plugin for WordPress`: https://github.com/daggerhart/openid-connect-generic
+.. _`OIDC plugin for WordPress`: https://wordpress.org/plugins/daggerhart-openid-connect-generic/
 .. _`Let's Encrypt`: https://letsencrypt.org/
 
 Make it happen
@@ -47,40 +47,12 @@ Get an OIDC plugin
 WordPress has a huge library of plugins provided by community members. The library is accessed from
 your WordPress dashboard by clicking ``Plugins`` in the left sidebar, then ``Add New`` at the top
 of the Plugins page. If you search for "openid connect," you'll find a large number of social login plugins 
-that let people login using Google, Facebook, LinkedIn, etc. There's also a plugin called "Generic 
-OpenID Connect." Ordinarily, this would be the choice we'd recommend for use with Globus. 
+that let people login using Google, Facebook, LinkedIn, etc. There's also a plugin called "OpenID Connect
+Generic Client." The author is "daggerhart" (Jonathan Daggerhart). This is a great plugin to use with
+Globus Auth.
 
-As it happens, there's a newer version of the Generic OpenID Connect plugin that has a nicer configuration 
-interface and some cool features, so we recommend that you get the newer version. This 
-version hasn't been submitted to the WordPress library, so you'll need to obtain it from GitHub. The 
-GitHub repository is https://github.com/daggerhart/openid-connect-generic.git.
+Install the OpenID Connect Generic Client plugin by clicking the ``Install Now`` button.
 
-**If you have shell access** on your WordPress server, the easiest way to obtain and install the plugin is to
-login to your WordPress server, find the plugins directory in your WordPress installation, and use
-``git clone`` to install it directly.
-
-Assuming your wordpress server is named ``coolscience.wordpress.com`` and WordPress is installed at 
-``/var/www/html/wordpress``, the following commands will do this.
-
-::
-
-   % ssh coolscience.wordpress.com
-   % cd /var/www/html/wordpress/wp-content/plugins
-   % git clone https://github.com/daggerhart/openid-connect-generic.git
-
-**If you don't have shell access** on your WordPress server, you'll need to make a copy of the plugin
-on your local system, create a Zip file of the plugin, then upload it to your WordPress site.
-Open a terminal shell on your local system and enter the following commands.
-
-::
-
-   % git clone https://github.com/daggerhart/openid-connect-generic.git
-   % zip -r openid-connect-generic openid-connect-generic
-
-You can now return to your Web browser, login to your WordPress site, click ``Plugins`` in the left
-sidebar of the dashboard, click ``Add New`` at the top of the page, and click ``Upload Plugin`` 
-at the top of the Add Plugins page. Choose the ``openid-connect-generic.zip`` 
-file you created above, and click ``Install Now`` to install the plugin.
 
 Activate and configure your plugin
 ----------------------------------
