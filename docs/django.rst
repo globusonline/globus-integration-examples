@@ -12,7 +12,7 @@ First, we will create a virtual environment named ``venv``, activate it to run o
 
    $ virtualenv venv
    $ . venv/bin/activate
-   $ pip install requests==2.11.1 django social-auth-app-django
+   $ pip install requests==2.11.1 django social-auth-app-django pyjwkest>=1.0.1
 
 In the next step, we create project ‘webapp’ with web application ‘webapp’:
 
@@ -84,7 +84,7 @@ The view returns Jinja2 template, ``templates/home.j2``, processed by ``render()
 If a user is authenticated, the page shows a username, email, first name, last name, UUID obtained from Globus Auth, and access token that can be used to call Globus services.
 The template also includes ‘Login with Globus’ and ‘Logout’ links.
 
-To make the ‘home’ view accessible, you need to add a corresponding URL to ``app/app/urls.py``
+To make the ‘home’ view accessible, you need to add a corresponding URL to ``webapp/urls.py``
 
 .. code-block:: python
 
@@ -99,10 +99,10 @@ To make the ‘home’ view accessible, you need to add a corresponding URL to `
        url(r'', include('social_django.urls', namespace='social')),
    ]
 
-As you probably noticed, another two URL patterns were added. The third one is to enable the ‘Logout’ link. The last one is to support the ‘Login with Globus’ link and other URLs required by OAuth2 protocol. Views corresponding with the two URL patterns are defined by Django and Python Social Auth.
+As you probably noticed, another two URL patterns were added. The third one is to enable the ‘Logout’ link. The last one is to support the ‘Login with Globus’ link and other URLs required by OpenID Connect protocol. Views corresponding with the two URL patterns are defined by Django and Python Social Auth.
 
-Because Python Social Auth does not come with Globus backend that defines how Python Social Auth should call Globus Auth OAuth2 server and go through the OAuth2 flow, you need to add the backend to your application. The backend is available in the repository, so you only need to copy it to ``app/backends/globus.py`` and create an empty ``__init__.py``.
-In the last step, you need to enable the Python Social Auth middleware in app/settings.py by adding:
+Because Python Social Auth does not come with Globus backend that defines how Python Social Auth should call the Globus Auth OpenID connect server and go through the OpenID Connect flow, you need to add the backend to your application. The backend is available in the repository, so you only need to copy it to ``webapp/globus.py``.
+In the last step, you need to enable the Python Social Auth middleware in webapp/settings.py by adding:
 
 .. code-block:: python
 
