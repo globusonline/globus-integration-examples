@@ -12,7 +12,7 @@ First, we will create a virtual environment named ``venv``, activate it to run o
 
    $ python3 -m venv venv
    $ . venv/bin/activate
-   $ pip install django social-auth-app-django python-jose>=3.0.0
+   $ pip install django social-auth-app-django python-jose
 
 In the next step, we create project ‘webapp’ with web application ‘webapp’:
 
@@ -88,16 +88,17 @@ To make the ‘home’ view accessible, you need to add a corresponding URL to `
 
 .. code-block:: python
 
-   from django.conf.urls import url, include
    from django.contrib import admin
+   from django.urls import include, path
    from . import views
 
    urlpatterns = [
-       url(r'^admin/', admin.site.urls),
-       url(r'^$', views.home, name='home'),
-       url(r'', include('django.contrib.auth.urls')),
-       url(r'', include('social_django.urls', namespace='social')),
+       path('admin/', admin.site.urls),
+       path('', views.home, name='home'),
+       path('', include('django.contrib.auth.urls')),
+       path('', include('social_django.urls', namespace='social')),
    ]
+
 
 As you probably noticed, another two URL patterns were added. The third one is to enable the ‘Logout’ link. The last one is to support the ‘Login with Globus’ link and other URLs required by OpenID Connect protocol. Views corresponding with the two URL patterns are defined by Django and Python Social Auth.
 
