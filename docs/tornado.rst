@@ -172,7 +172,7 @@ The web app can be run behind an reverse proxy server. If you use Debian-based s
         ProxyPass / http://127.0.0.1:8888/
         ProxyPassReverse / http://127.0.0.1:8888/
 
-After restarting the Apache server, the application should be accessible at https://&lt;your_server_host_name&gt;/.
+After restarting the Apache server, the application should be accessible at https://<your_server_host_name>/.
 
 .. _Tornado: https://tornadoweb.org/
 .. _Django: https://djangoproject.com/
