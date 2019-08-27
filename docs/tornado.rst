@@ -1,13 +1,13 @@
 Tornado
 ======
 
-Tornado is a Python web framework and asynchronous networking library. 
+`Tornado`_ is a Python web framework and asynchronous networking library. 
 Request handlers in Tornado web applications that take advantage of 
 non-blocking network I/O, have to be implemented in a certain way, 
 different than in web apps built based on frameworks like `Django`_ or `Flask`_.
-This section shows how to build a simple Tornado web app with Globus login handler. 
-The Globus login handler extends `tornado.auth.OAuth2Mixin` class that was changed in Tornado version 6.
-If you need to use Tornado version 5, please check out the corresponding handler and example at 
+This section shows how to create a simple Tornado web app with a Globus login handler. 
+The Globus login handler extends ``tornado.auth.OAuth2Mixin`` class from Tornado version 6. 
+If you need to use an older version of Tornado, please check out the corresponding handler and example at 
 `tornado_v5 <https://github.com/globusonline/globus-integration-examples/tree/master/src/tornado/tornado_v5/>`_
 
 Develop web app
@@ -23,9 +23,9 @@ First, we will create a virtual environment named ``venv``, activate it to run o
 
 
 We will start developing the web app from the minimal `hello world <https://www.tornadoweb.org/en/stable/guide/structure.html>`_ example 
-from the official Tornado documnetation, and will be changing it step by step. 
-First, we will extend `MainHandler` to show `Login` and Logout` links, and, when a user is logged in (`user_id` cookie set), 
-display information about the user. We will use the Tornado template (which we will save in `home.html`):
+on the official Tornado documentation, and will be modifying it to add Globus OAuth2 authentication. 
+First, we will extend the ``MainHandler`` to show ``Login`` and ``Logout`` links, and, when a user is logged in which means ``user_id`` cookie set, 
+display information about the user. To do this, we will use the Tornado template (``home.html``):
 
 .. code-block:: html
 
@@ -58,8 +58,8 @@ display information about the user. We will use the Tornado template (which we w
     </body>
     </html>
 
-The template shows user's information and `Logout` link when `user_id` is defined, and shows `Login to Globus` link otherwise. 
-The MainHandler will extract user's information from cookies, that the app sets in the authentication process, and render the template.
+The template shows user's information and ``Logout`` link when ``user_id`` is defined, and shows ``Login to Globus`` link otherwise. 
+The ``MainHandler`` will extract user's information from cookies, that the app sets in the authentication process, and render the template.
 
 .. code-block:: python
 
@@ -77,7 +77,7 @@ The MainHandler will extract user's information from cookies, that the app sets 
                         access_token=self.get_secure_cookie("access_token"),
                         refresh_token=self.get_secure_cookie("refresh_token"))
 
-When a user logs out, the `user_id` cookie must be cleared. We will do it in the `LogoutHandler`:
+When a user logs out, the ``user_id`` cookie must be cleared. We will do it in the ``LogoutHandler``:
 
 .. code-block:: python
 
@@ -86,7 +86,7 @@ When a user logs out, the `user_id` cookie must be cleared. We will do it in the
             self.clear_cookie("user_id")
             self.redirect("/")
 
-The request from a user's web browser generated when the user click the `Login` link and the OAuth2 flow 
+The request from a user's web browser generated when the user click the ``Login`` link and the OAuth2 flow 
 will be handled by a separate class:
 
 .. code-block:: python
@@ -117,16 +117,16 @@ will be handled by a separate class:
                     response_type="code",
                     extra_params={"access_type": "offline"})
 
-When a user clicks the `Login` link, the `authorized_redirect()` function in the `else` block is called. 
+When a user clicks the ``Login`` link, the ``authorized_redirect()`` function in the ``else`` block is called. 
 The functions is defined in one of the supper classes. The function redirects the user's web browser to Globus Auth. 
 Once the user authenticates to Globus Auth, the user's web browser is redirected back to the web app. 
-The redirection response comes with the `code` parameter set. The parameter is detected by `get_argument()` function. 
-In the subsequent lines, the `code` is exchanged to access tokens, then one of the access tokens is used to get a user info, 
-and the access tokens and user information are saved in cookies. Functions `get_tokens()` and `get_user_info()` are specific 
-to Globus Auth and have to be implemented in a subclass of tornado.auth.OAuth2Mixin, 
+The redirection response comes with the ``code`` parameter set. The parameter is detected by ``get_argument()`` function. 
+In the subsequent lines, the ``code`` is exchanged to access tokens, then one of the access tokens is used to get a user info, 
+and the access tokens and user information are saved in cookies. Functions ``get_tokens()`` and ``get_user_info()`` are specific 
+to Globus Auth and have to be implemented in a subclass of ``tornado.auth.OAuth2Mixin``, 
 `GlobusOAuth2Mixin class <https://github.com/globusonline/globus-integration-examples/tree/master/src/tornado/globus.py/>`_.
 
-Once we have all handlers implemented, we have to tie them with URLs: `/`, `/login`, `/logout`. To do it, We will modify `make_app()`:
+Once we have all handlers implemented, we have to tie them with URLs: ``/``, ``/login``, ``/logout``. To do it, We will modify ``make_app()``:
 
 .. code-block:: python
 
@@ -153,8 +153,8 @@ Once we have all handlers implemented, we have to tie them with URLs: `/`, `/log
         ]
         return tornado.web.Application(handlers, **settings)
 
-To get OAuth2 client id and secret that you have to provide in `settings`, register this web app on 
-https://developers.globus.org with `https://<your_server_host_name>/login` as a redirect URL.
+To get OAuth2 client id and secret that you have to provide in ``settings``, register this web app on 
+https://developers.globus.org with ``https://<your_server_host_name>/login`` as a redirect URL.
 
 After all of the changes are made, you can run the app:
 
