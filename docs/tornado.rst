@@ -86,8 +86,8 @@ When a user logs out, the ``user_id`` cookie must be cleared. We will do it in t
             self.clear_cookie("user_id")
             self.redirect("/")
 
-The request from a user's web browser generated when the user click the ``Login`` link and the OAuth2 flow 
-will be handled by a separate class:
+Other remaining URLs and requests that our app must respond to are the ``Login`` URL and the OAuth2 flow requests.
+We will handle them in one class:
 
 .. code-block:: python
 
@@ -118,15 +118,15 @@ will be handled by a separate class:
                     extra_params={"access_type": "offline"})
 
 When a user clicks the ``Login`` link, the ``authorized_redirect()`` function in the ``else`` block is called. 
-The functions is defined in one of the supper classes. The function redirects the user's web browser to Globus Auth. 
+The function is defined in one of the super classes. The function redirects the user's web browser to Globus Auth. 
 Once the user authenticates to Globus Auth, the user's web browser is redirected back to the web app. 
 The redirection response comes with the ``code`` parameter set. The parameter is detected by ``get_argument()`` function. 
-In the subsequent lines, the ``code`` is exchanged to access tokens, then one of the access tokens is used to get a user info, 
-and the access tokens and user information are saved in cookies. Functions ``get_tokens()`` and ``get_user_info()`` are specific 
-to Globus Auth and have to be implemented in a subclass of ``tornado.auth.OAuth2Mixin``, 
+The subsequent lines exchange the ``code`` to access tokens, then use one of the access tokens to get a user info, 
+and save the access tokens and user information in cookies. The functions that obtain the tokens, ``get_tokens()``, 
+and user info, ``get_user_info()``, are specific  to Globus Auth and have to be implemented in a subclass of ``tornado.auth.OAuth2Mixin``, 
 `GlobusOAuth2Mixin class <https://github.com/globusonline/globus-integration-examples/tree/master/src/tornado/globus.py/>`_.
 
-Once we have all handlers implemented, we have to tie them with URLs: ``/``, ``/login``, ``/logout``. To do it, We will modify ``make_app()``:
+Once we have all handlers implemented, we need to tie them with URLs: ``/``, ``/login``, ``/logout``. To do it, we will modify ``make_app()``:
 
 .. code-block:: python
 
