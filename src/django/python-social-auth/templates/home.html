@@ -17,7 +17,7 @@
         &nbsp; Access token: {{ access_token }}<br/>
         &nbsp; Refresh token: {{ refresh_token }}<br/>
         <br/>
-        <a href="{% url 'auth:logout' %}?next={{ request.path }}">Logout</a>
+        <a href="{% url 'logout' %}?next={{ request.path }}">Logout</a>
     {% else %}
         <a href="{% url 'social:begin' 'globus' %}?next={{ request.path }}">Login with Globus</a>
     {% endif %}
